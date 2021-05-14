@@ -1,0 +1,82 @@
+.main-content
+{
+    width: 100vw;
+    height: 100vh;
+    margin-top: 76px;
+}
+.main-content-inner-part
+{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 850px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.book-container
+{
+    width: 170px;
+    /* background-color: yellowgreen; */
+    height: 320px;
+}
+.book-container-inner-part
+{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    position: relative;
+}
+.book-container-inner-part img
+{
+    width: 80%;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.book-title
+{
+    padding-top: 5px;
+    font-weight: 600;
+    font-size: 12px;
+}
+.book-auther
+{
+    padding-top: 3px;
+    font-size: 12px;
+}
+.book-rating
+{
+    padding-top: 3px;
+}
+.book-price
+{
+    color: #2196F3;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: auto;
+}
+.book-atc
+{
+    margin-top: 10px;
+    background-color: #2196F3;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    width: 120px;
+    position: absolute;
+    top: 270px;
+}
+.book-atc:hover
+{
+    background-color: #0b7dda;
+}

@@ -31,7 +31,7 @@
                         <span>Cart </span>
                         <i class="fa fa-shopping-cart"></i>
                     </a>
-                    <a href="#about">
+                    <a href="/NODE-COURSE/book-store/public/html/sign-up.html">
                         <span>Sign in/Join  </span>
                         <i class="user-button fa fa-user"></i>
                     </a>
@@ -39,19 +39,21 @@
             </div>
 
             <div class="logo-container">
-                <img class="header-logo" src="pictures/Logo.png" alt="">
+                <a href="index.html"><img class="header-logo" src="pictures/Logo.png" alt=""><a href="index.html"></a>
             </div>
            <form class="search-container">
                 <input type="text" placeholder="Search for books by keyword / title /auther">
-                <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-button"><i class="fa fa-search fa-lg"></i></button>
            </form>
-            <div class="header-user-button">
+            <div class="header-user-button"  style="font-size: 24px;">
+                <a href="html/sign-up.html">
+                    <button class="header-user-button-inner">
+                        <i id="user" class="user-button fa fa-user fa-lg"></i>
+                        <!-- <span class="sign-in-button-inner-text"></span> -->
+                    </button>
+                </a>
                 <button class="header-user-button-inner">
-                    <i id="user" class="user-button fa fa-user"></i>
-                    <!-- <span class="sign-in-button-inner-text"></span> -->
-                </button>
-                <button class="header-user-button-inner">
-                    <i class="fa fa-shopping-cart"></i>
+                    <i class="fa fa-shopping-cart fa-lg"></i>
                     <!-- <span class="sign-in-button-inner-text"></span> -->
                 </button>
             </div>

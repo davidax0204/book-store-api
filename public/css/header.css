@@ -217,3 +217,8 @@ form.search-container button {
     border-left: none; /* Prevent double borders */
     cursor: pointer;
   }
+
+  .header-user-button a
+  {
+    text-decoration: none;
+  }

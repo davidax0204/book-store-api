@@ -1,0 +1,43 @@
+.main-content
+{
+    width: 100vw;
+    height: 100vh;
+    margin-top: 76px;
+}
+.main-content-inner-part-pro
+{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.profile-line
+{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    line-height: 30px;
+    padding-bottom: 10px;
+    /* font-size: 20px; */
+}
+.profile-line label
+{
+    padding-right: 5px;
+}
+.profile-line button
+{
+    height: 30px;
+    float: right;
+    position: absolute;
+    right: 0px;
+    background: #2196F3;
+    color: white;
+    cursor: pointer;
+    border: none;
+}

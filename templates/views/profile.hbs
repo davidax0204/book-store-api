@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/main-content.css">
+    <link rel="stylesheet" href="../css/sign-up.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    {{> header}}
+    <div class="main-content">
+            <div class="main-content-inner-part-pro">
+            <form method="POST" action="/sign-in">
+                <div class="container">
+                  <h1>Profile</h1>
+                  <hr>
+                    <div class="profile-line">   
+                        <label><b>Name: </b></label>
+                        <label>David</label>
+                        <button class="">edit</button>
+                    </div>
+                    <div class="profile-line">   
+                        <label><b>Email: </b></label>
+                        <label>davidax5625@gmail.com</label>
+                        <button class="">edit</button>
+                    </div>
+                    <div class="profile-line">   
+                        <label><b>Password: </b></label>
+                        <label>********</label>
+                        <button class="">edit</button>
+                    </div>
+                          
+                  
+                  <button type="submit" class="registerbtn">Logout</button>
+                  <button type="submit" class="registerbtn">Logout All</button>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>

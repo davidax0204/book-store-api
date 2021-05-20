@@ -16,34 +16,51 @@
     {{> header}}
     <div class="main-content">
             <div class="main-content-inner-part-pro">
-            <form method="POST" action="/sign-in">
-                <div class="container">
-                  <h1>Profile</h1>
+            <form>
+                {{!-- <div class="container"> --}}
+                <div class="profile-upper">
+                        <h1>Profile</h1>
+                        {{!-- <button class="">edit</button> --}}
+                </div>
+                  
                   <hr>
                     <div class="profile-line">   
                         <label><b>Name: </b></label>
-                        <label>David</label>
-                        <button class="">edit</button>
+                        <label>{{userName}}</label>
+                        <button id="nameEditButton">edit</button>
+                    </div>
+                    <div id="nameEditField" class="edit-line close">
+                        <input placeholder="Enter your new name" type="text" name="" id="">
+                        <button>save</button>
                     </div>
                     <div class="profile-line">   
                         <label><b>Email: </b></label>
-                        <label>davidax5625@gmail.com</label>
+                        <label>{{email}}</label>
                         <button class="">edit</button>
+                    </div>
+                    <div class="edit-line close">
+                        <input placeholder="Enter your new Email" type="text" name="" id="">
+                        <button>save</button>
                     </div>
                     <div class="profile-line">   
                         <label><b>Password: </b></label>
-                        <label>********</label>
+                        <label>******************</label>
                         <button class="">edit</button>
                     </div>
-                          
-                  
-                  <button type="submit" class="registerbtn">Logout</button>
-                  <button type="submit" class="registerbtn">Logout All</button>
-                </div>
+                    <div class="edit-line psw close">
+                        <input placeholder="Enter your new password" type="text" name="" id=""><br>
+                        <input placeholder="Repeat your password" type="text" name="" id="">
+                        <button>save</button>
+                    </div>
+                {{!-- </div> --}}
 
             </form>
-            
+            <div class="profile-page-logout-buttons">
+                <form method="POST" action="/profile/logoutAll"><button type="submit" class="registerbtn">Logout from all devices</button></form>
+                <form method="POST" action="/profile/logout"><button type="submit" class="registerbtn">Logout</button></form>
+            </div>
         </div>
     </div>
+    <script src="profile-edit.js"></script>
 </body>
 </html>

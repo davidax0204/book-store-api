@@ -17,14 +17,17 @@ const auth = async (req,res,next) =>
         // create a verubale inside of req names user with the datas of the fetched user
         req.token = token
         req.user = user
-        
+        // console.log('its ok')
+        // console.log(req.body)
         next()
     }
     catch(e)
     {
         
         // res.status(401).send({error: 'please authenticate'})
-        res.render('sign-in')
+        res.status(403).redirect('/sign-in')
+        // res.render('sign-in')
+        // console.error();
     }
 }
 

@@ -68,8 +68,9 @@ form input[type=text]
 .edit-line
 {
     display: none;
-    align-items: center;
+    /* align-items: center; */
     padding-bottom: 10px;
+    flex-direction: column;
 }
 .edit-line button
 {

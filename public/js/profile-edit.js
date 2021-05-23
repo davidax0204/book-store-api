@@ -59,16 +59,16 @@ pswEditButton.addEventListener('click',(e)=>
 
 
 
-nameSaveButton.addEventListener('click',(e)=>
-{
-    e.preventDefault()
-    const name = nameInput.value
+// nameSaveButton.addEventListener('click',(e)=>
+// {
+//     // e.preventDefault()
+//     // const name = nameInput.value
     
-})
+// })
 
 emailSaveButton.addEventListener('click',(e)=>
 {
-    e.preventDefault()
+    // e.preventDefault()
     const name = emailInput.value
     
 })
@@ -76,6 +76,7 @@ emailSaveButton.addEventListener('click',(e)=>
 pswSaveButton.addEventListener('click',(e)=>
 {
     e.preventDefault()
+
     const psw1 = psw1EditInput.value
     const psw2 = psw2EditInput.value
     
@@ -91,7 +92,8 @@ pswSaveButton.addEventListener('click',(e)=>
         pswWarningMSG.innerText = 'You passwords must match'
         return
     }
-    
+
+
     pswWarningMSG.classList.remove('open-warning-msg')
     pswWarningMSG.innerText = ''
 })

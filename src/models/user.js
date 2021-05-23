@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    avatar:
+    {
+        type: Buffer
+    }
 })
 
 userSchema.statics.findExistingUsers = async function(email)

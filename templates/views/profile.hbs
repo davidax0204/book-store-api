@@ -24,33 +24,43 @@
                 </div>
                   
                   <hr>
+
+                    
+
                     <div class="profile-line">   
                         <label><b>Name: </b></label>
                         <label>{{userName}}</label>
                         <button id="nameEditButton">edit</button>
                     </div>
-                    <div id="nameEditField" class="edit-line close">
-                        <input placeholder="Enter your new name" type="text" name="" id="">
-                        <button>save</button>
+                    <div id="nameEditField" class="edit-line">
+                        <input placeholder="Enter your new name" type="text" id="nameEditInput">
+                        <button type="submit" id="nameSaveButton">save</button>
                     </div>
+
+
+
+
                     <div class="profile-line">   
                         <label><b>Email: </b></label>
                         <label>{{email}}</label>
-                        <button class="">edit</button>
+                        <button id="emailEditButton">edit</button>
                     </div>
-                    <div class="edit-line close">
-                        <input placeholder="Enter your new Email" type="text" name="" id="">
-                        <button>save</button>
+                    <div id="emailEditField" class="edit-line">
+                        <input placeholder="Enter your new Email" type="text" id="emailEditInput">
+                        <button id="emailSaveButton">save</button>
                     </div>
+
+
                     <div class="profile-line">   
-                        <label><b>Password: </b></label>
+                        <label><b>Password: </b></label
                         <label>******************</label>
-                        <button class="">edit</button>
+                        <button id="pswEditButton">edit</button>
                     </div>
-                    <div class="edit-line psw close">
-                        <input placeholder="Enter your new password" type="text" name="" id=""><br>
-                        <input placeholder="Repeat your password" type="text" name="" id="">
-                        <button>save</button>
+                    <div id="pswEditField" class="edit-line psw">
+                        <input placeholder="Enter your new password" type="text"  id="psw1EditInput"><br>
+                        <input placeholder="Repeat your password" type="text" id="psw2EditInput">
+                        <p id="psw-warning-msg">You passwords must match and be greater than 7 chars</p>
+                        <button id="pswSaveButton">save</button>
                     </div>
                 {{!-- </div> --}}
 
@@ -61,6 +71,7 @@
             </div>
         </div>
     </div>
+    
     <script src="profile-edit.js"></script>
 </body>
 </html>

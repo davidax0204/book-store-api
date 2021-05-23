@@ -1,6 +1,8 @@
 const express = require('express')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+const multer = require('multer')
+const sharp = require('sharp')
 const router = new express.Router()
 
 router.get('', async (req,res)=>
@@ -25,7 +27,7 @@ router.get('/profile',auth, async (req,res)=>
 {
     const token = req.cookies['x-access-token'];
     const user = await User.findOne({'tokens.token': token})
-    console.log(user.name)
+    // console.log(user.name)
     res.render('profile',{
         userName:user.name,
         email:user.email
@@ -131,6 +133,30 @@ router.post('/profile/logoutAll', auth, async(req,res)=>
     {
         res.status(500).send()
     }
+})
+
+router.patch('/profile/update', auth, async (req, res) => 
+{
+    // const updates = Object.keys(req.body)
+    // const allowedUpdates = ['name', 'email', 'password', 'age']
+    // const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    
+    // if (!isValidOperation) {
+    //     return res.status(400).send({ error: 'Invalid updates!' })
+    // }
+
+    console.log(req.body)
+    
+    // try {
+    //     const user = req.user
+
+    //     updates.forEach((update) => user[update] = req.body[update])
+    //     await user.save()
+
+    //     res.send(user)
+    // } catch (e) {
+    //     res.status(400).send(e)
+    // }
 })
 
 module.exports = router

@@ -1,10 +1,8 @@
 const express = require('express')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
-const multer = require('multer')
-const sharp = require('sharp')
 const url = require('url')
-const { Console } = require('console')
+// const { Console } = require('console')
 const router = new express.Router()
 
 

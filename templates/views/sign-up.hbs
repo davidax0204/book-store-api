@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/main-content.css">
     <link rel="stylesheet" href="../css/sign-up.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
@@ -31,6 +32,8 @@
                   <label for="password"><b>Password</b></label>
                   <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
+                  <div id="emailErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{errorMSG}}</div>
+
                   <hr>
               
                   <p>By creating an account you agree to our Terms & Privacy.</p>
@@ -38,7 +41,7 @@
                 </div>
               
                 <div class="container signin">
-                  <p>Already have an account? <a href="/sign-in">Sign in</a>.</p>
+                  <p>Already have an account? <a href="/profile">Sign in</a>.</p>
                 </div>
             </form>
             

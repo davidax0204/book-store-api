@@ -3,6 +3,8 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
+const url = require('url')
+const { Console } = require('console')
 const router = new express.Router()
 
 
@@ -29,24 +31,71 @@ router.get('/profile',auth, async (req,res)=>
 {
     const token = req.cookies['x-access-token'];
     const user = await User.findOne({'tokens.token': token})
-    // console.log(user.name)
-    res.render('profile',{
-        userName:user.name,
-        email:user.email
-    })
-    
+
+    console.log(req.query)
+
+    if(!req.query.errorMSG)
+    {
+        res.render('profile',{
+            userName:user.name,
+            email:user.email
+        })
+    }
+    else
+    {
+        if(req.query.errorMSG==='Email is Invalid')
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+                emailErrorMSG:'Email is Invalid'
+            })
+        }
+        else if(req.query.errorMSG==='Email is taken')
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+                emailErrorMSG:'Email is taken'
+            })
+        }
+        else if(req.query.errorMSG==='Name is Invalid')
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+                nameErrorMSG:'Name is Invalid'
+            })
+        }
+        else if(req.query.errorMSG==='Password is Invalid')
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+                passwordErrorMSG:'Password is Invalid'
+            })
+        }
+        
+    }
 })
 
 
 
 
 
-
+router.get('/sign-up/error', (req,res)=>
+{   
+    // res.send(req.query)
+    res.render('sign-up',{
+        errorMSG:req.query.errorMSG
+    })
+})
 
 
 
 
 router.post('/sign-up', async (req, res) => {
+    // console.log('here')
     const user = new User(req.body)
     console.log(req.body)
     try
@@ -63,13 +112,48 @@ router.post('/sign-up', async (req, res) => {
         }
 
         res.cookie('x-access-token',token, options) 
-        
+
         res.redirect('/profile')
-        // res.status(201).send({ user, token })
     }
     catch(e)
     {
-        res.status(400).send(e.message)
+        // res.send(e)
+        // const error = e.message.substr(24)
+        var finalError = ''
+
+        // res.send(e)
+
+        // res.send(e.length)
+        try
+        {
+            if (e.errors.name)
+            {
+                finalError = e.errors.name.message + ' & '
+            }
+            if(e.errors.email)
+            {   
+                finalError += e.errors.email.message + ' & '
+            }
+            if(e.errors.password)
+            {
+                finalError += e.errors.password.message
+            }
+        }
+        catch(e2)
+        {
+            finalError += 'email is taken'
+        }
+        
+        // finalError = 'boo'
+        // res.send(error)
+        // res.send(finalError)
+
+        res.redirect(url.format({
+            pathname:"/sign-up/error",
+            query: {
+                errorMSG: finalError
+                }
+            }));
     }
 })
 
@@ -134,7 +218,7 @@ router.post('/profile/update', auth, async (req, res) =>
 {
 
     const updates = Object.keys(req.body)
-    console.log(updates)
+    // console.log(updates)
     const allowedUpdates = ['name', 'email', 'password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
@@ -148,9 +232,61 @@ router.post('/profile/update', auth, async (req, res) =>
         updates.forEach((update) => user[update] = req.body[update])
         await user.save()
         res.redirect('/profile')
-        
-    } catch (e) {
-        res.status(400).send(e)
+
+    } catch (e) 
+    {
+        // res.send(e)
+        const error = e.message.substr(24)
+        const finalError = ''
+        // res.send(error)
+        try
+        {
+            if(error[0] === 'e')
+            {
+                res.redirect(url.format({
+                    pathname:"/profile",
+                    query: {
+                    errorMSG: 'Email is Invalid'
+                    }
+                }));
+            }
+            else if(error[0] === 'n')
+            {
+                res.redirect(url.format({
+                    pathname:"/profile",
+                    query: {
+                    errorMSG: 'Name is Invalid'
+                    }
+                }));
+            }
+            else if(e.errors.password)
+            {
+                res.redirect(url.format({
+                    pathname:"/profile",
+                    query: {
+                    errorMSG: 'Password is Invalid'
+                    }
+                }));
+            }
+        }
+        catch(e2)    
+        {
+            res.redirect(url.format({
+                pathname:"/profile",
+                query: {
+                errorMSG: 'Email is taken'
+                }
+            }));
+        }    
+
+
+        // res.redirect(url.format({
+        //     pathname:"/profile",
+        //     query: {
+        //        errorMSG: finalError
+        //      }
+        //   }));
+        // res.send(e.errors.name.properties.message)
     }
 })
 

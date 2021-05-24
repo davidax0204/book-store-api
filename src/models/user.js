@@ -7,28 +7,46 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        // minlength:3,
+        validate(value)
+        {
+            for(let charIdx = 0; charIdx < value.length; charIdx += 1) {
+                if (!validator.isAlpha(value[charIdx], 'en-US') && value[charIdx]!==' ')
+                {
+                    throw new Error('The name must contain letters only'); 
+                }   
+            }
+            if(value.length<3)
+            {
+                throw new Error('Name is too short, 3 chars min')
+            }
+        }
     },
     email: {
         type: String,
         unique: true,
         required: true,
         trim: true,
-        lowercase: true
-        // validate(value) {
-        //     if (!validator.isEmail(value)) {
-        //         throw new Error('Email is invalid')
-        //     }
-        // }
+        lowercase: true,
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Email is invalid')
+            }
+        }
     },
     password: {
         type: String,
         required: true,
-        minlength: 7,
         trim: true,
         validate(value) {
-            if (value.toLowerCase().includes('password')) {
+            if (value.toLowerCase().includes('password')) 
+            {
                 throw new Error('Password cannot contain "password"')
+            }
+            if(value.length<7)
+            {
+                throw new Error('Password is too short, 7 chars min')
             }
         }
     },

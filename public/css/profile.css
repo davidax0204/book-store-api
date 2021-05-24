@@ -123,7 +123,12 @@ form input[type=text]
     display: none;
     color: red;
 }
+.psw-warning-msg
+{
+    display: none;
+    color: red;
+}
 .open-warning-msg
 {
-    display: unset !important;
+    display: flex !important;
 }

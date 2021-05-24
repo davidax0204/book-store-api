@@ -27,14 +27,17 @@
                         <label><b>Name: </b></label>
                         <label>{{userName}}</label>
                         <button id="nameEditButton">edit</button>
+                        
                     </div>
+                    
                     <form method="POST" action="/profile/update">
                         <div id="nameEditField" class="edit-line">
                             <input placeholder="Enter your new name" name="name" type="text" id="nameEditInput">
                             <button type="submit" id="nameSaveButton">save</button>
                         </div>
+                        
                     </form>
-
+                    <div id="nameErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{nameErrorMSG}}</div>
 
                     <div class="profile-line">   
                         <label><b>Email: </b></label>
@@ -47,8 +50,9 @@
                             <button type="submit" id="emailSaveButton">save</button>
                         </div>
                     </form>
+                    <div id="emailErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{emailErrorMSG}}</div>
                     
-
+                    
                     <div class="profile-line">   
                         <label><b>Password: </b></label
                         <label>******************</label>
@@ -57,12 +61,12 @@
                     <form  method="POST" action="/profile/update ">
                         <div id="pswEditField" class="edit-line">
                             <input class="psw-input" placeholder="Enter your new password" name="password" type="text"  id="psw1EditInput"><br>
-                            <input placeholder="Repeat your password" type="text" id="psw2EditInput">
-                            <p id="psw-warning-msg">You passwords must match and be greater than 7 chars</p>
+                            {{!-- <input placeholder="Repeat your password" type="text" id="psw2EditInput"> --}}
+                            {{!-- <p id="psw-warning-msg">You passwords must match and be greater than 7 chars</p> --}}
                             <button type="submit" id="pswSaveButton">save</button>
                         </div>
                     </form>
-                
+                    <div id="passwordErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{passwordErrorMSG}}</div>
             </div>
 
             <div class="profile-page-logout-buttons">

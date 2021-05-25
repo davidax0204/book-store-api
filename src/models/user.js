@@ -80,6 +80,7 @@ userSchema.statics.findExistingUsers = async function(email)
 userSchema.methods.generateAuthToken = async function  ()
 {
     const user = this 
+    // console.log(process.env.JWT_SECRET)
     const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
     user.tokens = user.tokens.concat({ token:token })
@@ -91,6 +92,7 @@ userSchema.methods.generateAuthToken = async function  ()
 userSchema.methods.generateAdminAuthToken = async function  ()
 {
     const user = this 
+    // console.log(process.env.JWT_SECRET_ADMIN)
     const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
     user.adminTokens = user.adminTokens.concat({ token:token })
@@ -101,13 +103,6 @@ userSchema.methods.generateAdminAuthToken = async function  ()
 
 userSchema.statics.findByCredentials = async(email,password)=>
 {
-    // console.log('here')
-    // const isExistingAdmin = await User.findOne({"adminTokens.0":{"$exists": true},})
-    // if(isExistingAdmin)
-    // {
-    //     throw new Error('Unable to login')
-    // }
-
     if(email === 'admin@admin.com' && password==='admin0204')
     {
         var admin = await User.findOne({email})
@@ -127,18 +122,11 @@ userSchema.statics.findByCredentials = async(email,password)=>
     
     if (!user)
     {
-        console.log('here now')
         throw new Error('Unable to login')
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
-    // console.log(password)
-    // console.log(user.password)
-
-    // if (password!==user.password)
-    // {
-    //     throw new Error('Unble to login')
-    // }
+    
     if (!isMatch)
     {
         throw new Error('Unble to login')

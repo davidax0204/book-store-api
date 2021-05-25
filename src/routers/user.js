@@ -36,7 +36,7 @@ router.get('/profile',auth, async (req,res)=>
     const token = req.cookies['x-access-token'];
     const user = await User.findOne({'tokens.token': token})
 
-    console.log(req.query)
+    // console.log(req.query)
 
     if(!req.query.errorMSG)
     {
@@ -87,7 +87,7 @@ router.get('/profile',auth, async (req,res)=>
 
 router.get('/sign-in/error', (req,res)=>
 {
-    console.log(req.query.errorMSG)
+    // console.log(req.query.errorMSG)
     res.render('sign-in',{
         errorMSG: req.query.errorMSG
     })
@@ -107,7 +107,7 @@ router.get('/sign-up/error', (req,res)=>
 router.post('/sign-up', async (req, res) => {
     // console.log('here')
     const user = new User(req.body)
-    console.log(req.body)
+    // console.log(req.body)
     try
     {
         await User.findExistingUsers(user.email)
@@ -128,13 +128,9 @@ router.post('/sign-up', async (req, res) => {
     }
     catch(e)
     {
-        // res.send(e)
-        // const error = e.message.substr(24)
+
         var finalError = ''
 
-        // res.send(e)
-
-        // res.send(e.length)
         try
         {
             if (e.errors.name)
@@ -175,16 +171,16 @@ router.post('/sign-in', async(req,res)=>
     {
         
         const user = await User.findByCredentials(req.body.email, req.body.password)
-        // console.log(user)
+
         var token;
-        if(user.name==='admin')
+        if(user.name==='admin' || user.adminTokens.length>0)
         {
             
-            token = await user.generateAdminAuthToken(req.body.email, req.body.password)
+            token = await user.generateAdminAuthToken()
         }
-        
+
         token = await user.generateAuthToken()
-        // console.log('here now2')
+        
 
         let options = {
             path:"/",

@@ -39,11 +39,10 @@ const authAdmin = async (req,res,next) =>
     
     try
     {
+
         const token = req.cookies['x-access-token'];
-        console.log(token)
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const admin = await User.findOne({ _id: decoded._id, 'adminTokens.token': token})
-        console.log(admin)
         if(!admin)
         {
             // to trigger the catch
@@ -58,7 +57,6 @@ const authAdmin = async (req,res,next) =>
     }
     catch(e)
     {
-        
         // res.status(401).send({error: 'please authenticate'})
         res.status(403).redirect('/profile')
         // res.render('sign-in')

@@ -23,7 +23,10 @@ const auth = async (req,res,next) =>
     }
     catch(e)
     {
-        
+        // if(user.email==='admin@admin.com' || user.name==='admin')
+        // {
+        //     res.status(403).redirect('/profile/admin')
+        // }
         // res.status(401).send({error: 'please authenticate'})
         res.status(403).redirect('/sign-in')
         // res.render('sign-in')
@@ -31,4 +34,36 @@ const auth = async (req,res,next) =>
     }
 }
 
-module.exports = auth
+const authAdmin = async (req,res,next) =>
+{
+    
+    try
+    {
+        const token = req.cookies['x-access-token'];
+        console.log(token)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const admin = await User.findOne({ _id: decoded._id, 'adminTokens.token': token})
+        console.log(admin)
+        if(!admin)
+        {
+            // to trigger the catch
+            throw new Error()
+        }
+        // create a verubale inside of req names user with the datas of the fetched user
+        req.token = token
+        req.admin = admin
+        // console.log('its ok')
+        // console.log(req.body)
+        next()
+    }
+    catch(e)
+    {
+        
+        // res.status(401).send({error: 'please authenticate'})
+        res.status(403).redirect('/profile')
+        // res.render('sign-in')
+        // console.error();
+    }
+}
+
+module.exports = {auth,authAdmin}

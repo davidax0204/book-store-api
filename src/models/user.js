@@ -56,6 +56,11 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
+    adminTokens:[{
+        token:{
+            type: String,
+        }
+    }],
     avatar:
     {
         type: Buffer
@@ -83,17 +88,57 @@ userSchema.methods.generateAuthToken = async function  ()
     return token
 }
 
+userSchema.methods.generateAdminAuthToken = async function  ()
+{
+    const user = this 
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
+
+    user.adminTokens = user.adminTokens.concat({ token:token })
+    await user.save()
+
+    return token
+}
+
 userSchema.statics.findByCredentials = async(email,password)=>
 {
-    const user = await User.findOne({email})
+    // console.log('here')
+    // const isExistingAdmin = await User.findOne({"adminTokens.0":{"$exists": true},})
+    // if(isExistingAdmin)
+    // {
+    //     throw new Error('Unable to login')
+    // }
 
+    if(email === 'admin@admin.com' && password==='admin0204')
+    {
+        var admin = await User.findOne({email})
+        if(!admin)
+        {
+            admin = new User({
+                name:'admin',
+                email:'admin@admin.com',
+                password:'admin0204'
+            })
+        }
+        return admin
+        
+    }
+    
+    const user = await User.findOne({email})
+    
     if (!user)
     {
+        console.log('here now')
         throw new Error('Unable to login')
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
+    // console.log(password)
+    // console.log(user.password)
 
+    // if (password!==user.password)
+    // {
+    //     throw new Error('Unble to login')
+    // }
     if (!isMatch)
     {
         throw new Error('Unble to login')

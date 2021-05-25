@@ -1,6 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
-const auth = require('../middleware/auth')
+const {auth,authAdmin} = require('../middleware/auth')
 const url = require('url')
 // const { Console } = require('console')
 const router = new express.Router()
@@ -24,6 +24,12 @@ router.get('/sign-up', async (req,res)=>
     res.render('sign-up')
 })
 
+router.get('/profile/admin', authAdmin, (req,res)=>
+{
+
+    
+    res.render('admin-dashboard')
+})
 
 router.get('/profile',auth, async (req,res)=>
 {
@@ -79,7 +85,13 @@ router.get('/profile',auth, async (req,res)=>
 
 
 
-
+router.get('/sign-in/error', (req,res)=>
+{
+    console.log(req.query.errorMSG)
+    res.render('sign-in',{
+        errorMSG: req.query.errorMSG
+    })
+})
 
 router.get('/sign-up/error', (req,res)=>
 {   
@@ -101,6 +113,7 @@ router.post('/sign-up', async (req, res) => {
         await User.findExistingUsers(user.email)
         await user.save()
         const token = await user.generateAuthToken()
+
 
         let options = {
             path:"/",
@@ -157,11 +170,21 @@ router.post('/sign-up', async (req, res) => {
 
 router.post('/sign-in', async(req,res)=>
 {
-    console.log(req.body)
+    // console.log(req.body)
     try
     {
+        
         const user = await User.findByCredentials(req.body.email, req.body.password)
-        const token = await user.generateAuthToken()
+        // console.log(user)
+        var token;
+        if(user.name==='admin')
+        {
+            
+            token = await user.generateAdminAuthToken(req.body.email, req.body.password)
+        }
+        
+        token = await user.generateAuthToken()
+        // console.log('here now2')
 
         let options = {
             path:"/",
@@ -171,14 +194,30 @@ router.post('/sign-in', async(req,res)=>
         }
 
         res.cookie('x-access-token',token, options) 
-        res.redirect('/profile')
+
+        if(user.adminTokens.length > 0)
+        {
+            res.redirect('/profile/admin')
+        }
+        else
+        {
+            res.redirect('/profile')
+        }
+        
 
     }
     catch(e)
     {
-        res.status(400).send(e.message)
+        res.redirect(url.format({
+            pathname:"/sign-in/error",
+            query: {
+                errorMSG: 'The email or the password or both wrong'
+                }
+            }));
     }
 })
+
+router.post
 
 router.post('/profile/logout',auth, async(req,res)=>
 {

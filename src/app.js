@@ -18,6 +18,7 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 const jsPath = path.join(__dirname, '../public/js')
+const cssPath = path.join(__dirname, '../public/css')
 const picturesPath = path.join(__dirname, '../public/pictures')
 
 
@@ -39,6 +40,7 @@ app.use(cookieParser())
 app.use(userRouter)
 app.use(bookRouter)
 app.use(express.static(jsPath))
+app.use(express.static(cssPath))
 app.use(express.static(picturesPath))
 app.use(express.static(publicDirectoryPath))
 

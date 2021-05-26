@@ -36,14 +36,27 @@ router.get('/profile',auth, async (req,res)=>
     const token = req.cookies['x-access-token'];
     const user = await User.findOne({'tokens.token': token})
 
-    // console.log(req.query)
+    // console.log('user',token)
+    // console.log(user.adminTokens.length)
+    
 
     if(!req.query.errorMSG)
     {
-        res.render('profile',{
-            userName:user.name,
-            email:user.email
-        })
+        if(user.adminTokens.length>0)
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+                dashBoard:'DashBoard'
+            })
+        }
+        else
+        {
+            res.render('profile',{
+                userName:user.name,
+                email:user.email,
+            })
+        }
     }
     else
     {
@@ -193,7 +206,7 @@ router.post('/sign-in', async(req,res)=>
 
         if(user.adminTokens.length > 0)
         {
-            res.redirect('/profile/admin')
+            res.redirect('/profile')
         }
         else
         {
@@ -238,6 +251,7 @@ router.post('/profile/logoutAll', auth, async(req,res)=>
     try
     {
         req.user.tokens = []
+        // req.user.adminTokens = []
         await req.user.save()
         res.redirect('/profile')
     }

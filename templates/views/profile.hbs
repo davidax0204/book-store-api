@@ -72,6 +72,7 @@
             <div class="profile-page-logout-buttons">
                 <form method="POST" action="/profile/logoutAll"><button type="submit" class="registerbtn">Logout from all devices</button></form>
                 <form method="POST" action="/profile/logout"><button type="submit" class="registerbtn">Logout</button></form>
+                <form method="GET" action="/profile/admin"><button id="adminDashBoardButton" type="submit" class="registerbtn">{{dashBoard}}</button></form>
             </div>
             
 
@@ -82,5 +83,6 @@
     
     
     <script src="profile-edit.js"></script>
+    <script src="dash-board-button.js"></script>
 </body>
 </html>

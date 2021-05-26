@@ -42,15 +42,15 @@ const authAdmin = async (req,res,next) =>
 
         const token = req.cookies['x-access-token'];
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const admin = await User.findOne({ _id: decoded._id, 'adminTokens.token': token})
-        if(!admin)
+        const user = await User.findOne({ _id: decoded._id, 'adminTokens.token': token})
+        if(!user)
         {
             // to trigger the catch
             throw new Error()
         }
         // create a verubale inside of req names user with the datas of the fetched user
         req.token = token
-        req.admin = admin
+        req.user = user
         // console.log('its ok')
         // console.log(req.body)
         next()

@@ -132,3 +132,8 @@ form input[type=text]
 {
     display: flex !important;
 }
+
+.adminDashBoardButtonInvisible
+{
+    display: none !important;
+}

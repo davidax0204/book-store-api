@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-content.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="/css/cart-page.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav-container">
+        <div class="navigation-bar">
+            
+            <div class="mobile-menu">
+                <button class="main-menu">
+                    <div class="menu-line" id="menu-line-top"></div>
+                    <div class="menu-line" id="menu-line-middle"></div>
+                    <div class="menu-line" id="menu-line-bottom"></div>
+                </button>
+                <div id="myLinks">
+                    <a class="mobile-menu-search-container">
+                        <input type="text" placeholder="Search for books by keyword / title /auther">
+                        <button type="submit" id="mobile-menu-search-button"><i class="fa fa-search"></i></button>
+                    </a>
+                    <a href="#about">
+                        <span>Cart </span>
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+                    <a href="/sign-up">
+                        <span>Sign in/Join  </span>
+                        <i class="user-button fa fa-user"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="logo-container">
+                <a href="/">
+                <img class="header-logo" src="/pictures/Logo.png" alt="">
+                    {{!-- <img class="header-logo" src="NODE-COURSE/book-store/public/pictures/Logo.png" alt=""> --}}
+                </a>
+            </div>
+
+           <div class="container-admin">
+                {{!-- <input type="text" placeholder="Search for books by keyword /title /auther"> --}}
+
+                <form method="GET" action="/profile/admin/users"><button class="admin-users-button" type="submit" >Users</button></form>
+                <form method="GET" action="/profile/admin/books"><button class="admin-users-button" type="submit" >Books</button></form>
+                
+           </div>
+            <div class="header-user-button"  style="font-size: 24px;">
+                {{!-- <a href="/sign-up">
+                    <button class="header-user-button-inner">
+                        <i id="user" class="user-button fa fa-sign-in fa-lg"></i>
+                        <!-- <span class="sign-in-button-inner-text"></span> -->
+                    </button>
+                </a> --}}
+                <a href="/profile">
+                    <button class="header-user-button-inner">
+                        <i id="user" class="user-button fa fa-user fa-lg"></i>
+                        <!-- <span class="sign-in-button-inner-text"></span> -->
+                    </button>
+                </a>
+                {{!-- <button class="header-user-button-inner">
+                    <i class="fa fa-shopping-cart fa-lg"></i>
+                    <!-- <span class="sign-in-button-inner-text"></span> -->
+                </button> --}}
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <div class="main-content-inner-part-pro">
+            <div class="form-div">
+                <div class="profile-upper">
+                        <h1>Profile</h1>
+                        {{!-- <button class="">edit</button> --}}
+                </div>
+
+                <hr>
+                    <div class="profile-line">   
+                        <label><b>Name: </b></label>
+                        <label>{{name}}</label>
+                        <button id="nameEditButton">edit</button>
+                        
+                    </div>
+                    
+                    <form method="POST" action="/profile/adminUpdate/user/{{id}}">
+                        <div id="nameEditField" class="edit-line">
+                            <input placeholder="Enter your new name" name="name" type="text" id="nameEditInput">
+                            <button type="submit" id="nameSaveButton">save</button>
+                        </div>
+                        
+                    </form>
+                    <div id="nameErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{nameErrorMSG}}</div>
+
+                    <div class="profile-line">   
+                        <label><b>Email: </b></label>
+                        <label>{{email}}</label>
+                        <button id="emailEditButton">edit</button>
+                    </div>
+                    <form method="POST" action="/profile/adminUpdate/user/{{id}}">
+                        <div id="emailEditField" class="edit-line">
+                            <input placeholder="Enter your new Email" name="email" type="text" id="emailEditInput">
+                            <button type="submit" id="emailSaveButton">save</button>
+                        </div>
+                    </form>
+                    <div id="emailErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{emailErrorMSG}}</div>
+                    
+                    
+                    <div class="profile-line">   
+                        <label><b>Password: </b></label
+                        <label>******************</label>
+                        <button id="pswEditButton">edit</button>
+                    </div>
+                    <form  method="POST" action="/profile/adminUpdate/user/{{id}}">
+                        <div id="pswEditField" class="edit-line">
+                            <input class="psw-input" placeholder="Enter your new password" name="password" type="text"  id="psw1EditInput"><br>
+                            {{!-- <input placeholder="Repeat your password" type="text" id="psw2EditInput"> --}}
+                            {{!-- <p id="psw-warning-msg">You passwords must match and be greater than 7 chars</p> --}}
+                            <button type="submit" id="pswSaveButton">save</button>
+                        </div>
+                    </form>
+                    <div id="passwordErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{passwordErrorMSG}}</div>
+            </div>
+            <form class="del-user" method="POST" action="/profile/adminUpdate/user/delete/{{id}}"><button type="submit" class="registerbtn">Delete User</button></form>
+        </div>
+    </div>
+        <script src="/profile-edit.js"></script>
+</body>
+</html>

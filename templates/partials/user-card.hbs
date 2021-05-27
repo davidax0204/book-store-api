@@ -1,0 +1,24 @@
+{{#each users}}
+    <div class="user-card-wrap">
+        <div class="user-card">
+            <div class="user-card-profile-level">
+                <label for=""><b>Name: </b></label>
+                <div>{{name}}</div>
+            </div>
+            <div class="user-card-profile-level">
+                <label for=""><b>Email: </b></label>
+                <div>{{email}}</div>
+                
+            </div>
+            <div class="user-card-profile-level">
+                <label for=""><b>Password: </b></label>
+                <div>*****************</div>
+            </div>
+            
+            <div class="user-card-buttons-actions">
+                <button>Edit user details</button>
+                <button>Edit user cart</button>
+            </div>
+        </div>
+    </div>
+{{/each}}

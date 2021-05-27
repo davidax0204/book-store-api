@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/main-content.css">
     <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="/css/cart-page.css">
+    <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $(document).ready(function()
+        {
+            var array = [{{array}}];
+            var fruitsArray = ["Apple", "Banana", "Orange", "Mango", "Pineapple"];
+            $.each(fruitsArray, function(value, index){
+                $("#result").append(value + ": " + index + '<br>');
+            });
+            
+        });
+    </script>  
+
     <title>Document</title>
 </head>
 <body>
@@ -47,8 +63,9 @@
            <div class="container-admin">
                 {{!-- <input type="text" placeholder="Search for books by keyword /title /auther"> --}}
 
-                <button class="admin-users-button" type="submit" >Users</button>
-                <button class="admin-users-button" type="submit" >Books</button>
+                <form method="GET" action="/profile/admin/users"><button class="admin-users-button" type="submit" >Users</button></form>
+                <form method="GET" action="/profile/admin/books"><button class="admin-users-button" type="submit" >Books</button></form>
+                
            </div>
             <div class="header-user-button"  style="font-size: 24px;">
                 {{!-- <a href="/sign-up">
@@ -72,28 +89,46 @@
         </div>
         
     </div>
-
+        
         <div class="main-content">
             <div class="main-content-inner-part-admin">
-                <div class="user-card-wrap">
-                    <div class="user-card">
-                        <div class="user-card-profile-level">
-                            <label for=""><b>Name: </b></label>
-                            <div>David Axelrod</div>
-                        </div>
-                        <div class="user-card-profile-level">
-                            <label for=""><b>Email: </b></label>
-                            <div>davidax5625@gmail.com</div>
-                        </div>
-                        <div class="user-card-profile-level">
-                            <label for=""><b>Password: </b></label>
-                            <div>*****************</div>
+                {{#each users}}
+                    <div class="user-card-wrap">
+                        <div class="user-card">
+
+
+                            <div class="user-card-profile-level">
+                                <label for=""><b>Name: </b></label>
+                                <div>{{name}}</div>
+                            </div>
+
+
+                            <div class="user-card-profile-level">
+                                <label for=""><b>Email: </b></label>
+                                <div>{{email}}</div>
+                                
+                            </div>
+                            <div class="user-card-profile-level">
+                                <label for=""><b>Password: </b></label>
+                                <div>*****************</div>
+                            </div>
+                            
+                            <div class="user-card-buttons-actions">
+                                <form method="POST" action="/profile/adminUpdate/{{_id}}"><button>Edit user details</button></form>
+                                <button>Edit user cart</button>
+                            </div>
                         </div>
                     </div>
+
                     
-                </div>
-                
+                    
+
+                {{/each}}
             </div>
         </div>
+
+        {{!-- <div id="result"></div> --}}
+
+    
 </body>
 </html>

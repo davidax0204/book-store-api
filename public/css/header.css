@@ -128,6 +128,10 @@ form.search-container button {
     {
         display: unset;
     }
+    .container-admin
+    {
+        display: none !important;
+    }
 }
 
 .mobile-menu
@@ -149,10 +153,15 @@ form.search-container button {
     border: 0;
     background: none;
 }
-.main-menu:focus
+.menu-butttonnnn:hover
 {
-    outline: none;
-    overflow: hidden;
+    Text-Decoration: None !important; 
+}
+.main-menu:focus,
+.main-menu:hover
+{
+    outline: none !important;
+    overflow: hidden !important;
 }
 .menu-line 
 {
@@ -180,7 +189,7 @@ form.search-container button {
     display: none;
   }
   .mobile-menu a {
-    width: 80vw;
+    width: 90vw;
     color: white;
     padding: 14px 16px;
     text-decoration: none;
@@ -222,3 +231,12 @@ form.search-container button {
   {
     text-decoration: none;
   }
+
+  .mobile-menu main-menu:hover
+  {
+    text-decoration: none;
+  }
+
+  .noHover{
+    pointer-events: none;
+}

@@ -90,10 +90,10 @@ form input[type=text]
     flex-direction: column;
     align-items:unset;
 }
-.profile-page-logout-buttons
+/* .profile-page-logout-buttons
 {
     padding-top: 20px;
-}
+} */
 .profile-page-logout-buttons button
 {
     display: flex;
@@ -147,4 +147,27 @@ form input[type=text]
     cursor: pointer;
     border: none;
     right: 0px;
+}
+@media(max-width:540px)
+{
+    .profile-line
+    {
+        width: 300px;
+        position: relative;
+    }
+    .edit-line
+    {
+        width: 300px;
+        position: relative;
+    }
+    form input[type=text]
+    {
+        width: 75%;
+        position: relative;
+    }
+    /* .profile-line button
+    {
+        position: unset;
+        float: right;
+    } */
 }

@@ -23,15 +23,19 @@
                   <p>Please fill in this form to create an account.</p>
                   <hr>
 
-                  <label for="name"><b>Name</b></label>
-                  <input type="text" placeholder="Enter First Name" name="name" id="name" required>
+                    <div class="sign-up-line-wrap">
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" placeholder="Enter First Name" name="name" id="name" required>
+                    </div>
 
-                  <label for="email"><b>Email</b></label>
-                  <input type="text" placeholder="Enter Email" name="email" id="email" required>
-                          
-                  <label for="password"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
+                    <div class="sign-up-line-wrap">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                    </div>
+                    <div class="sign-up-line-wrap">
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                    </div>
                   <div id="emailErrorMSG" class="profile-line psw-warning-msg open-warning-msg">{{errorMSG}}</div>
 
                   <hr>

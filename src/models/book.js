@@ -11,12 +11,10 @@ const bookSchema = new mongoose.Schema({
     author:
     {
         type:String,
-        required: true
     },
     description:
     {
-        type:String,
-        required: true
+        // type:String,
     },
     format:
     {
@@ -45,39 +43,15 @@ const bookSchema = new mongoose.Schema({
     price:
     {
         type: Number,
-        required: true
+        // required: true
     },
-    picture:
-    {
-        type: Buffer,
-    }
+    // picture:
+    // {
+    //     type: Buffer,
+    // }
 })
 
+const Book = mongoose.model('Book', bookSchema)
 
-
-
-const Book = mongoose.model('Book',bookSchema)
-
-const bookEX = new Book({
-    name:'Bob',
-    author:'BobAuthor',
-    description:'Bla Bla Bla',
-    price: 23.5
-})
-
-
-const addBook = async ()=>
-{
-    try
-    {
-        await bookEX.save()
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-
-// addBook()
 
 module.exports = Book

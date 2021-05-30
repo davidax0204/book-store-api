@@ -1,0 +1,42 @@
+.create-book-inner-container-row
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.create-book-inner-container-row input[type=text]
+{
+    margin-left: 10px;
+    width: 100%
+}
+
+.main-content-inner-part-admin-create-book
+{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 850px;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.sign-up-line-wrap input[type=text]
+{
+    background-color: #f1f1f1;
+    /* padding-left: 10px; */
+    font-size: 15px;
+    width: 100%;
+    flex-direction: row;
+    height: 45px;
+    border: none;
+}
+.sign-up-line-wrap label
+{
+    padding-bottom: 10px;
+    padding-top: 5px;
+}

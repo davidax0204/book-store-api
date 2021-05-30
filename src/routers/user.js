@@ -273,7 +273,6 @@ router.post('/sign-in', async(req,res)=>
     }
 })
 
-router.post
 
 router.post('/profile/logout',auth, async(req,res)=>
 {
@@ -442,7 +441,7 @@ router.post('/profile/adminUpdate/user/:id', authAdmin, async(req,res)=>
 {
     
     const updates = Object.keys(req.body)
-    // console.log(updates)
+    console.log(updates)
     const allowedUpdates = ['name', 'email', 'password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     

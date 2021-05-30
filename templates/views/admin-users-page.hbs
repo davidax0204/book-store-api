@@ -92,6 +92,7 @@
         
         <div class="main-content">
             <div class="main-content-inner-part-admin">
+                
                 {{#each users}}
                     <div class="user-card-wrap">
                         <div class="user-card">
@@ -115,7 +116,7 @@
                             
                             <div class="user-card-buttons-actions">
                                 <form method="POST" action="/profile/adminUpdate/{{_id}}"><button>Edit user details</button></form>
-                                <button>Edit user cart</button>
+                                <form class="del-user" method="POST" action="/profile/adminUpdate/user/delete/{{_id}}"><button type="submit" class="registerbtn">Delete User</button></form>
                             </div>
                         </div>
                     </div>

@@ -34,10 +34,13 @@
                 </a>
             </div>
 
-           <form class="search-container">
-                <input type="text" placeholder="Search for books by keyword /title /auther">
+
+           <form method="POST" action="/sort" class="search-container">
+                <input type="text" name="sort" placeholder="Search for books by keyword /title /auther">
                 <button type="submit" class="search-button"><i class="fa fa-search fa-lg"></i></button>
            </form>
+
+
             <div class="header-user-button"  style="font-size: 24px;">
                 <a href="/sign-up">
                     <button class="header-user-button-inner">

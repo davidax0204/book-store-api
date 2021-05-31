@@ -47,6 +47,21 @@ router.get('/profile/admin/books',authAdmin, async (req,res)=>
     })
 })
 
+router.post('/sort', async (req,res)=>
+{
+    const sort = req.body.sort
+    const books = await Book.find({
+        "name": {"$regex": sort, "$options": "i" }
+    })
+    res.render('index',{
+        books
+    })
+})
+
+
+
+
+
 router.get('/profile/admin/createBook',authAdmin, async (req,res)=>
 {
     res.render('admin-create-book')
@@ -65,7 +80,7 @@ router.post('/profile/admin/createBook', authAdmin, async (req,res)=>
     {
         book.image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/200px-Question_mark_%28black%29.svg.png'
     }
-    
+
     try
     {
         await book.save()

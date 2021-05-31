@@ -188,6 +188,7 @@ form.search-container button {
 .mobile-menu #myLinks {
     display: none;
   }
+  
   .mobile-menu a {
     width: 90vw;
     color: white;

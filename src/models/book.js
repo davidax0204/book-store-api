@@ -45,10 +45,10 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         // required: true
     },
-    // picture:
-    // {
-    //     type: Buffer,
-    // }
+    image:
+    {
+        type:String
+    }
 })
 
 const Book = mongoose.model('Book', bookSchema)

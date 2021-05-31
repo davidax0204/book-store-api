@@ -16,17 +16,21 @@
     
     <div class="main-content">
         <div class="main-content-inner-part">
-            <div class="book-container">
-                <div class="book-container-inner-part">
-                    <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5101/9781510105249.jpg" alt="">
-                    <span class="book-title">Shadow and Bone: Now a Netflix Original Series</span>
-                    <span class="book-auther">Leigh Bardugo</span>
-                    <span class="book-rating">* * * * *</span>
-                    <span class="book-price">15.05$</span>
-                    <button class="book-atc">Add to cart</button>
-                </div>
-            </div>
-            <div class="book-container">
+            {{#each books}}
+                <a href="/book/{{_id}}">
+                    <div class="book-container">
+                        <div class="book-container-inner-part">
+                            <img src="{{image}}" alt="">
+                            <span class="book-title">{{name}}</span>
+                            <span class="book-auther">{{author}}</span>
+                            {{!-- <span class="book-rating">* * * * *</span> --}}
+                            <span class="book-price">{{price}}$</span>
+                            <button class="book-atc">Add to cart</button>
+                        </div>
+                    </div>
+                </a>
+            {{/each}}
+            {{!-- <div class="book-container">
                 <div class="book-container-inner-part">
                     <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7868/9781786892737.jpg" alt="">
                     <span class="book-title">The Midnight Library</span>
@@ -114,7 +118,7 @@
                     <span class="book-price">15.05$</span>
                     <button class="book-atc">Add to cart</button>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <script src="js/menu-button.js"></script>
         

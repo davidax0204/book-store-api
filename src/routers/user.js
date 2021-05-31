@@ -8,10 +8,12 @@ const router = new express.Router()
 
 
 
-router.get('', async (req,res)=>
-{
-    res.render('index')
-})
+// router.get('', async (req,res)=>
+// {
+//     res.render('index',{
+        
+//     })
+// })
 
 
 router.get('/sign-in', async (req,res)=>

@@ -171,9 +171,16 @@
                     </div>
 
                     <div class="sign-up-line-wrap">
-                        <label for="price"><b>Price</b></label>
-                        <input type="number" placeholder="Enter book price" name="price" >
+                        <label for="image"><b>Image</b></label>
+                        <input type="text" placeholder="Enter book image URL" name="image" />
                     </div>
+
+                    <div class="sign-up-line-wrap">
+                        <label for="price"><b>Price</b></label>
+                        <input type="number" step=".01" placeholder="Enter book price" name="price" >
+                    </div>
+
+                    
 
 
 
@@ -186,8 +193,17 @@
               
                 
             </form>
-            
+
+            {{!-- <form>
+                <div class="sign-up-line-wrap">
+                        <label><b>Image</b></label>
+                        <input type="file" id="avatar" name="avatar" placeholder="Enter book image"/>
+                        <input type="submit">
+                    </div>
+                    
+            </form> --}}
         </div>
     </div>
+    <script src="/upload-image.js"></script>
 </body>
 </html>

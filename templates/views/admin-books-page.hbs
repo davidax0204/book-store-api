@@ -84,10 +84,10 @@
                 {{#each books}}
                     <div class="book-card">
                         <div class="book-card-wrap">
-                            <img src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5101/9781510105249.jpg" alt="">
+                            <img src="{{image}}" alt="">
                             <div class="book-title-admin"><b>{{name}}</b></div>
                             <div class="book-author-admin">{{author}}</div>
-                            <div class="book-price-admin">{{price}}$</div>
+                            <b><div style="font-size: 20px;" class="book-price-admin">{{price}}$</div></b>
                             <div class="book-card-buttons">
                                 <form method="GET" action="/profile/admin/books/updateBook/{{_id}}"><button class="admin-users-button" type="submit" >Edit book details</button></form>
                                 <form method="POST" action="/profile/admin/books/delete/{{_id}}"><button class="admin-users-button" type="submit" >Remove book</button></form>

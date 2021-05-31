@@ -6,13 +6,17 @@ const bookRouter = require('../src/routers/book')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const hbs = require('hbs')
+const fileUpload = require('express-fileupload')
 
 const app = express()
+
+app.use(fileUpload())
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
 
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')

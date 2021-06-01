@@ -48,6 +48,10 @@ const bookSchema = new mongoose.Schema({
     image:
     {
         type:String
+    },
+    owner: 
+    {
+        type: mongoose.Schema.Types.ObjectId
     }
 })
 

@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const Book = require('../models/book')
 const {auth,authAdmin} = require('../middleware/auth')
 const url = require('url')
 const { log } = require('console')
@@ -25,6 +26,84 @@ router.get('/sign-in', async (req,res)=>
 router.get('/sign-up', async (req,res)=>
 {
     res.render('sign-up')
+})
+
+router.get('/cart', async (req,res)=>
+{
+    const token = req.cookies['x-access-token'];
+    // console.log(token)
+    const user = await User.findOne({'tokens.token': token})
+
+    // console.log(user.books)
+
+    var bookDetails;
+    let bookList = []
+
+    // user.books.forEach( async (book) => {
+    //     // console.log(book)
+    //     var foundedBook = await Book.findOne({'_id':book.book})
+    //     var foundeQNT = book.quantity
+    //     bookDetails = {foundedBook,foundeQNT}
+
+
+    //     bookList.push(bookDetails)
+        
+    // });
+
+
+    for(const book of user.books)
+    {
+        var bookDetails = await Book.findOne({'_id':book.book})
+        var quantity = book.quantity
+        console.log(bookDetails.image)
+        bookList.push({bookDetails,quantity})
+    }
+
+    // console.log(bookList)
+    
+
+    res.render('cart-page',{
+        bookList
+    })
+
+
+})
+
+router.post('/atc/:id',auth,async(req,res)=>
+{
+    const book = await Book.findOne({'_id':req.params.id})
+    const token = req.cookies['x-access-token'];
+    const user = await User.findOne({'tokens.token': token})
+
+    var duplication=false
+
+    try
+    {
+        user.books.forEach(book => 
+        {
+            if(book.book===req.params.id)
+            {
+                book.quantity++
+                duplication=true
+            }
+        });
+
+        if(!duplication)
+        {
+            user.books = user.books.concat({book:req.params.id})
+        }
+        flag = false
+        
+        await user.save()
+
+        res.redirect('/')
+
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+    // console.log('here2')
 })
 
 // router.get('/profile/admin', authAdmin, (req,res)=>

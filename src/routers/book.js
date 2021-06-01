@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const Book = require('../models/book')
+const User = require('../models/book')
 const {auth,authAdmin} = require('../middleware/auth')
 const url = require('url')
 const { update } = require('../models/book')
@@ -32,10 +33,26 @@ router.get('/book/:id', async (req,res)=>
 //     res.render('book-page')
 // })
 
-router.get('/cart',(req,res)=>
-{
-    res.render('cart-page')
-})
+// router.get('/cart', async (req,res)=>
+// {
+//     const token = req.cookies['x-access-token'];
+//     console.log(token)
+//     const user = await User.findOne({'tokens.token': token})
+
+//     console.log(user)
+
+//     var bookDetails;
+//     const bookList = [{}]
+
+//     // user.books.forEach( async (book) => {
+//     //     var foundedBook = await Book.findOne({'_id':book})
+//     //     console.log(foundedBook)
+//     // });
+
+//     res.render('cart-page')
+
+
+// })
 
 
 router.get('/profile/admin/books',authAdmin, async (req,res)=>

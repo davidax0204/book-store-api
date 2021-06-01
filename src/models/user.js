@@ -50,21 +50,36 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    tokens: [{
+    tokens: 
+    [{
         token: {
             type: String,
             required: true
         }
     }],
-    adminTokens:[{
-        token:{
+    adminTokens:
+    [{
+        token:
+        {
             type: String,
         }
     }],
     avatar:
     {
         type: Buffer
-    }
+    },
+    books:
+    [{
+        book: 
+        {
+            
+        },
+        quantity:
+        {
+            type:Number,
+            default: 0
+        }
+    }]
 })
 
 userSchema.statics.findExistingUsers = async function(email)

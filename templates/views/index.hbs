@@ -25,7 +25,7 @@
                             <span class="book-auther">{{author}}</span>
                             {{!-- <span class="book-rating">* * * * *</span> --}}
                             <span class="book-price">{{price}}$</span>
-                            <button class="book-atc">Add to cart</button>
+                            <form method="POST" action="/atc/{{_id}}"><button class="book-atc">Add to cart</button></form>
                         </div>
                     </div>
                 </a>
@@ -120,7 +120,7 @@
                 </div>
             </div> --}}
         </div>
-        <script src="js/menu-button.js"></script>
+        <script src="/js/menu-button.js"></script>
         
     </div>
 

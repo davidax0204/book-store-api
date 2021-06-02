@@ -33,19 +33,25 @@
                                     </div>
                                 
                             </div>
-                            <div class="book-atc-action">
-                                <div class="book-atc-action-edit">
-                                    <input type="number">
-                                    <button>save</button>
-                                </div>
-                                <button class="book-atc-action-remove">remove</button>
+                            <div class="book-atc-action" style="color: #2196F3;">
+                                <b>{{booksPrice}}$</b>
+                                <form method="POST" action="/atc/updateQuantity/{{bookDetails._id}}" class="book-atc-action-edit">
+                                    <input min="1" name="quantity" value="{{quantity}}" type="number">
+                                    <button type="submit">save</button>
+                                </form>
+                                <form method="POST" action="/atc/removeBook/{{bookDetails._id}}">
+                                    <button type="submit" class="book-atc-action-remove">remove</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 {{/each}}
                 
-
-                <button id="myBtn" class="book-atc-checkout">Checkout</button>
+                <div class="cart-final-result-box">
+                    <div><b>Total price:</b> {{totalPrice}}$</div>
+                    <button id="myBtn" class="book-atc-checkout">Checkout</button>
+                </div>
+                
 
                 <div id="myModal" class="modal">
                     <!-- Modal content -->

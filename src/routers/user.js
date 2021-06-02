@@ -4,6 +4,8 @@ const Book = require('../models/book')
 const {auth,authAdmin} = require('../middleware/auth')
 const url = require('url')
 const { log } = require('console')
+const { remove } = require('../models/user')
+const { deleteModel } = require('mongoose')
 // const { Console } = require('console')
 const router = new express.Router()
 
@@ -28,45 +30,33 @@ router.get('/sign-up', async (req,res)=>
     res.render('sign-up')
 })
 
-router.get('/cart', async (req,res)=>
+router.get('/cart',auth, async (req,res)=>
 {
     const token = req.cookies['x-access-token'];
-    // console.log(token)
     const user = await User.findOne({'tokens.token': token})
 
-    // console.log(user.books)
-
     var bookDetails;
+    let totalPrice=0;
     let bookList = []
-
-    // user.books.forEach( async (book) => {
-    //     // console.log(book)
-    //     var foundedBook = await Book.findOne({'_id':book.book})
-    //     var foundeQNT = book.quantity
-    //     bookDetails = {foundedBook,foundeQNT}
-
-
-    //     bookList.push(bookDetails)
-        
-    // });
-
 
     for(const book of user.books)
     {
         var bookDetails = await Book.findOne({'_id':book.book})
         var quantity = book.quantity
-        console.log(bookDetails.image)
-        bookList.push({bookDetails,quantity})
+        var booksPrice = bookDetails.price*(quantity+1)
+        var userId = user._id
+        totalPrice+=booksPrice
+        quantity++
+        // console.log(bookDet`ails)
+        bookList.push({bookDetails,quantity,booksPrice,userId})
     }
 
-    // console.log(bookList)
     
 
     res.render('cart-page',{
-        bookList
+        bookList,
+        totalPrice
     })
-
-
 })
 
 router.post('/atc/:id',auth,async(req,res)=>
@@ -104,6 +94,66 @@ router.post('/atc/:id',auth,async(req,res)=>
         console.log(e)
     }
     // console.log('here2')
+})
+
+router.post('/atc/updateQuantity/:bookId',auth, async (req,res)=>
+{
+    try
+    {
+        const token = req.cookies['x-access-token'];
+        const user = await User.findOne({'tokens.token': token})
+
+        for(const book of user.books)
+        {
+            if(book.book === req.params.bookId)
+            {
+                book.quantity = req.body.quantity-1
+            }
+        }
+        
+        await user.save()
+        res.redirect('/cart')
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
+
+})
+
+router.post('/atc/removeBook/:bookId', auth, async(req,res)=>
+{
+    try
+    {
+        const token = req.cookies['x-access-token'];
+        const user = await User.findOne({'tokens.token': token})
+
+        // user.update( {"$pull": {"books": { "book":req.params.bookId}}},{ safe: true, multi:true })
+
+        // Favorite.updateOne( {cn: req.params.name}, { $pullAll: {uid: [req.params.deleteUid] } } )
+
+
+        // Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}, { safe: true, multi:true }, function(err, obj) {
+        //     //do something smart
+        // });
+
+        // console.log(user.books)
+
+        user.books = user.books.filter((book)=>
+        {
+            return book.book !== req.params.bookId
+        })
+
+        // console.log(user.books)
+        // console.log(user);
+
+        await user.save()
+        res.redirect('/cart')
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
 })
 
 // router.get('/profile/admin', authAdmin, (req,res)=>
